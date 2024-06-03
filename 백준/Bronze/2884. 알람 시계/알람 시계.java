@@ -1,24 +1,24 @@
-import java.util.Scanner;
+import java.util.*;
+
 public class Main {
-
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-
-        int hour = sc.nextInt();
-        int min = sc.nextInt();
-
-        if(min < 45) {
-            hour --;                              // 45보다 작을시 시간을 -1
-            min = 60-(45-min);
-
-            if(hour < 0) {
-                hour = 23;                        // 0 보다 작을시 23시로
-            }
-            System.out.println(hour + " " + min);
+        
+        int H = sc.nextInt();
+        int M = sc.nextInt();
+        
+        sc.close();
+        
+        if (M >= 45) {
+            M -= 45;
         } else {
-            System.out.println(hour + " " + (min - 45));
+            M = M + 15; // M = H + 60 - 45
+            if (H == 0) {
+                H = 23;
+            } else {
+               H -= 1;
+            }
         }
-
+        System.out.print(H + " " + M);
     }
 }
