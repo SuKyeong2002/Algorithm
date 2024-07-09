@@ -7,13 +7,19 @@ public class Main {
         int T = sc.nextInt();
         sc.nextLine();  // 개행 문자 소모
         
+        String[] results = new String[T];
+        
         for (int i = 0; i < T; i++) {
             String str = sc.nextLine();
             char firstChar = str.charAt(0);
             char lastChar = str.charAt(str.length() - 1);
-            System.out.println("" + firstChar + lastChar);
+            results[i] = "" + firstChar + lastChar;
         }
         
         sc.close();
+        
+        for (int i = 0; i < T; i++) {
+            System.out.println(results[i]);
+        }
     }
 }
