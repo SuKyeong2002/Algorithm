@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main {
+public class SuKyeong2002 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -27,13 +27,13 @@ public class Main {
         int[][] dp = new int[max + 1][4];
 
         /*
-         * 배열값이 1, 2, 일 때 dp 초기값 설정
+         * 배열값이 1, 2, 3 일 때 dp 초기값 설정
          * dp[2][1] -> (1, 1)
          * dp[2][2] -> (2)
          * dp[3][1] -> (1, 1, 1)
          * dp[3][2] -> (1, 2)
          * dp[3][3] -> (3)
-         * *** 조건절이 등호가 아닌 부호인 이유: 큰 경우에서도 사용해야 하기 때문
+         * *** 조건절이 등호가 아닌 부호인 이유: 점화식에서 사용해야 하기 때문
          */
         dp[1][1] = 1;
         if (max >= 2) {
@@ -94,10 +94,23 @@ public class Main {
             dp[i][3] = dp[i - 3][1] + dp[i - 3][2] + dp[i - 3][3];
         }
 
-        // 결과 (각각의 테스트 케이스의 방법의 수의 합) 출력
+        /*
+         * 결과 (각각의 테스트 케이스의 방법의 수의 합) 출력
+         * StringBuilder 사용한 이유: 124ms -> 108ms
+         * 결론: 출력이 많은 경우 StringBuilder로 모아서 출력하는 게 좋음
+         */
+
+        /*
+         * for (int i = 0; i < testCase; i++) {
+         * System.out.println(dp[TestCaseArr[i]][1] + dp[TestCaseArr[i]][2] +
+         * dp[TestCaseArr[i]][3]);
+         * }
+         */
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < testCase; i++) {
-            sb.append(dp[TestCaseArr[i]][1] + dp[TestCaseArr[i]][2] + dp[TestCaseArr[i]][3]).append('\n');
+            sb.append(dp[TestCaseArr[i]][1] + dp[TestCaseArr[i]][2] +
+                    dp[TestCaseArr[i]][3]).append('\n');
         }
         System.out.println(sb);
     }
