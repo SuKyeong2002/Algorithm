@@ -68,7 +68,6 @@ public class Main {
          */
         else {
             while (power > 1) {
-
                 // 1. 1승 감소
                 half = (int) Math.pow(2, power - 1);
 
@@ -76,40 +75,41 @@ public class Main {
                 if ((row < half) && (column < half)) {
                     /*
                      * 왼쪽 위 블록
+                     * 1번째 블록이므로 방문 순서 0부터 시작
                      */
                     visitNum += 0;
 
                 } else if ((row < half) && (column >= half)) {
                     /*
                      * 오른쪽 위 블록
-                     * -> 블록의 크기: half * half
+                     * -> 2번째 블록이므로 이전 블록의 크기 (half * half) 더하기
                      * -> 블록 내부 좌표로 변환: column을 0~(half-1)로 다시 세야 함
                      * -> column을 half만큼 감소
                      */
-
                     visitNum += half * half;
                     column -= half;
 
                 } else if ((row >= half) && (column < half)) {
                     /*
                      * 왼쪽 아래 블록
+                     * -> 3번째 블록이므로 이전 블록의 크기 (2 * half * half) 더하기
+                     * -> 블록의 크기: half * half * 2
                      * -> 블록 내부 좌표로 변환: row을 0~(half-1)로 다시 세야 함
                      * -> row에서 half만큼 감소
                      */
-
                     visitNum += 2 * half * half;
                     row -= half;
 
                 } else {
                     /*
                      * 오른쪽 아래 블록
+                     * -> 4번째 블록이므로 이전 블록의 크기 (3 * half * half) 더하기
                      * -> 블록 내부 좌표로 변환: row, column을 0~(half-1)로 다시 세야 함
                      * -> row, column에서 half만큼 감소
                      */
                     visitNum += 3 * half * half;
                     row -= half;
                     column -= half;
-
                 }
 
                 // 1승 감소
