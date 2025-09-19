@@ -4,13 +4,12 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int currentWeight = 500; // 현재 중량 저장
-
-    static int caseCount = 0; // 경우의 수 변수 선언
-    static int N; // 운동 키트 개수 변수 선언
-    static int K; // 하루 중량 감소량 변수 선언
-    static int[] weights; // 각 운동 키트의 중량 증가량 배열 선언
-    static boolean[] visited; // 방문 여부 배열 선언
+    static int N; // 운동 키트 개수
+    static int K; // 하루 중량 감소량
+    static int[] weights; // 각 운동 키트의 중량 증가량 배열
+    static boolean[] visited; // 방문 여부 배열
+    static int currentWeight = 500; // 현재 중량
+    static int caseCount = 0; // 경우의 수
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,7 +30,7 @@ public class Main {
         }
 
         /*
-         * 중량이 500 이상인 경우에만 DFS 탐색
+         * *** 중량이 500 이상인 경우에만 DFS 탐색
          * DFS 사용한 이유: 한 경우를 끝까지 탐색한 뒤 돌아옴
          */
         DFS(500, 0);
@@ -43,18 +42,24 @@ public class Main {
 
     // DFS 탐색 메서드 정의
     private static void DFS(int currentWeight, int day) {
-        // N일 동안 운동한 경우
+
+        // 마지막 날인 경우
         if (day == N) {
+            // 경우의 수 증가
             caseCount++;
             return;
         }
 
-        // 각 운동 키트에 대해 탐색
+        /*
+         * 각 운동 키트에 대해 탐색
+         * 운동 기간동안 항상 중량이 500 이상이어야 함
+         */
         for (int i = 0; i < N; i++) {
+
             // 방문하지 않은 운동 키트인 경우
             if (!visited[i]) {
 
-                // 현재 중량 계산
+                // *** 다음 중량 계산
                 int nextWeight = currentWeight + weights[i] - K;
 
                 // 중량이 500 이상인 경우
